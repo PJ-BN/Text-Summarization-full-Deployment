@@ -1,0 +1,124 @@
+{% comment %} <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        {% if success_message %}
+            <p>{{ success_message }}</p>
+        {% endif %}
+        <br>
+        <form method="POST" action="{% url 'submit_form' %}">
+            {% csrf_token %}
+            <textarea id="my_text_field" name="my_text_field" rows="2" cols="200"></textarea><br>
+            <input type="submit" value="Submit">
+        </form>
+        
+        
+        <script src="" async defer></script>
+    </body>
+</html> {% endcomment %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Summarization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .chat-container {
+            width: 80%;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f5f5f5;
+        }
+
+        .message {
+            background-color: #e1f7d5;
+            padding: 8px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .user-message {
+            background-color: #fff;
+            text-align: right;
+        }
+
+        .assistant-message {
+            background-color: #d9edf7;
+        }
+
+        .message-text {
+            margin: 0;
+        }
+
+        .input-container {
+            margin-top: 10px;
+            display: flex;
+        }
+
+        .input-field {
+            flex-grow: 1;
+            padding: 6px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+
+        .send-button {
+            padding: 6px 10px;
+            margin-left: 5px;
+            background-color: #4caf50;
+            border: none;
+            color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="message assistant-message">
+            <p class="message-text">Write an article in the below text field</p>
+        </div>
+        <div class="message user-message">
+            <p class="message-text">
+            {% if success_message %}
+                <p>{{ question }}</p>
+            {% endif %}
+            </p>
+        </div>
+        <div class="message assistant-message">
+            <p class="message-text">
+            {% if success_message %}
+                <p>{{ success_message }}</p>
+            {% endif %}
+            </p>
+        </div>
+        <!-- Add more messages here as needed -->
+
+        <div class="input-container">
+            <form method="POST" action="{% url 'submit_form' %}">
+            {% csrf_token %}
+                
+                <textarea id="my_text_field" name="my_text_field" class="input-field" rols = "1" cols = "70%">
+                </textarea>
+                <button class="send-button">Send</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
