@@ -35,6 +35,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #38261A;
         }
 
         .chat-container {
@@ -55,11 +56,16 @@
 
         .user-message {
             background-color: #fff;
-            text-align: right;
+            text-align: left;
+            margin-right: 300px
         }
 
         .assistant-message {
             background-color: #d9edf7;
+            text-align: right;
+            margin-left: 300px
+
+
         }
 
         .message-text {
@@ -94,20 +100,27 @@
         <div class="message assistant-message">
             <p class="message-text">Write an article in the below text field</p>
         </div>
+
+        {% for i in question %}
+        
+
         <div class="message user-message">
             <p class="message-text">
-            {% if success_message %}
-                <p>{{ question }}</p>
+            {% if i %}
+                <p>{{ i.0 }}</p>
             {% endif %}
             </p>
         </div>
+        
+
         <div class="message assistant-message">
             <p class="message-text">
-            {% if success_message %}
-                <p>{{ success_message }}</p>
+            {% if i %}
+                <p>{{ i.1 }}</p>
             {% endif %}
             </p>
         </div>
+        {% endfor %} 
         <!-- Add more messages here as needed -->
 
         <div class="input-container">

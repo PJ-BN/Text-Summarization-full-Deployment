@@ -5,6 +5,9 @@ from django.shortcuts import render, redirect
 import spacy
 import pytextrank
 
+question = []
+answer = ""
+
 def summary(example_text):
 
   nlp = spacy.load("en_core_web_lg")
@@ -22,15 +25,23 @@ def summary(example_text):
 
 def submit_form(request):
     if request.method == 'POST':
+        
         text_field_value = request.POST.get('my_text_field')
-        # Do something with the text_field_value, such as saving it to a database
-        # You can also pass it to a template if you want to display it on another page
+        
         
         value = summary(text_field_value)
         
+        global answer
+        if(answer == value):
+          pass
+        else:
+          answer= value
+          question.append([text_field_value,value])
+        
+        
         return render(request,  'member/index.html',  {
-            'success_message': value,
-            'question': text_field_value,
+            'success_message': answer,
+            'question': question,
             })
     else:
         return render(request, 'member/index.html')
